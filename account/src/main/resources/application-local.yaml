@@ -24,3 +24,10 @@ spring:
     drop-first: ${LIQUIBASE_DROP_FIRST:false}
   application:
     name: account-app
+info:
+  artifactId: '@project.artifactId@'
+  version: '@project.version@'
+
+
+
+
