@@ -3,6 +3,8 @@ package com.bank.authorization.controller;
 import com.bank.authorization.dto.UserDto;
 import com.bank.authorization.entity.UserEntity;
 import com.bank.authorization.service.UserService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,7 @@ import java.util.List;
 /**
  * Контроллер {@link UserDto}
  */
+@Tag(name = "User", description = "Контроллер для авторизации пользователей")
 @RestController
 @RequiredArgsConstructor
 public class UserController {
@@ -29,6 +32,7 @@ public class UserController {
      * @param user заполненный полями role, profileId, password экземпляр DTO {@link UserDto}
      * @return {@link ResponseEntity}, {@link UserDto} и HttpStatus.OK
      */
+    @Operation(summary = "Создание нового пользователя")
     @PostMapping("/create")
     public ResponseEntity<UserDto> create(@RequestBody UserDto user) {
         return new ResponseEntity<>(service.save(user), HttpStatus.CREATED);
@@ -38,6 +42,7 @@ public class UserController {
      * @param id технический идентификатор {@link UserEntity}
      * @return {@link ResponseEntity}, {@link UserDto} и HttpStatus.OK
      */
+    @Operation(summary = "Получение пользователя по id")
     @GetMapping("/read/{id}")
     public ResponseEntity<UserDto> read(@PathVariable("id") Long id) {
         return new ResponseEntity<>(service.findById(id), HttpStatus.OK);
@@ -47,6 +52,8 @@ public class UserController {
      * @param user экземпляр DTO заполненный полями подлежащими изменению {@link UserDto}
      * @return {@link ResponseEntity}, {@link UserDto} и HttpStatus.OK
      */
+
+    @Operation(summary = "Обновление данных пользователя по id")
     @PutMapping("/{id}/update")
     public ResponseEntity<UserDto> update(@PathVariable("id") Long id,
                                           @RequestBody UserDto user) {
@@ -57,6 +64,7 @@ public class UserController {
      * @param ids лист технических идентификаторов {@link UserEntity}
      * @return {@link ResponseEntity}, {@link UserDto} и HttpStatus.OK
      */
+    @Operation(summary = "Получение списка пользователей по списку id")
     @GetMapping("/read/all")
     public ResponseEntity<List<UserDto>> readAll(@RequestParam List<Long> ids) {
         return new ResponseEntity<>(service.findAllByIds(ids), HttpStatus.OK);
