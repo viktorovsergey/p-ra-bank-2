@@ -7,4 +7,6 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
-
+info:
+  artifactId: '@project.artifactId@'
+  version: '@project.version@'
