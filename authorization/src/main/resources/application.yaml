@@ -2,6 +2,7 @@ spring:
   application:
     name: authorization-app
     version: @project.version@
+    artifactId: @project.artifactId@
   profiles:
     active: local
 eureka:
